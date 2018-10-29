@@ -11,3 +11,9 @@ def distance(temp1, temp2):
     length = math.sqrt(math.pow((temp1[0] - temp2[0]), 2) + math.pow((temp1[1] - temp2[1]), 2)
                        + math.pow((temp1[2] - temp2[2]), 2) + math.pow((temp1[3] - temp2[3]), 2))
     return length
+
+def getNeighbors(ourData):
+    data = []
+    for temp in data:
+        data.append((temp[0:4]))
+    return data
