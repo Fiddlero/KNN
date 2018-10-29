@@ -1,17 +1,18 @@
 import math as math
 import operator
 import pandas as pd
-import numpy as np
 
 data = pd.read_csv('iris.data.test', header=None)
 testSet = data.values
 data = pd.read_csv('iris.data.learning', header=None)
 trainingSet = data.values
 
+
 def distance(temp1, temp2):
     length = math.sqrt(math.pow((temp1[0] - temp2[0]), 2) + math.pow((temp1[1] - temp2[1]), 2)
                        + math.pow((temp1[2] - temp2[2]), 2) + math.pow((temp1[3] - temp2[3]), 2))
     return length
+
 
 def getNeighbors(data):
     distance = []
@@ -31,10 +32,12 @@ def getResponse(neighbours):
     sortedVotes = sorted(classVotes.__iter__(), key=operator.itemgetter(-1))
     return sortedVotes[0]
 
+
 class KNN:
     def __init__(self, temp, learningData):
         self.temp = temp
         self.data = learningData
+
     def predict(self, testingData):
         labels = []
         for y in range(len(testingData)):
@@ -49,16 +52,18 @@ class KNN:
                 neighbors.append(distances[i][0])
             labels.append(getResponse(neighbors))
         return labels
+
     def score(self, testingData, neightbours):
         correct = 0
         for i in range(len(testingData)):
             data = testingData[i]
-            if(data[4] == neightbours[i]):
+            if (data[4] == neightbours[i]):
                 correct += 1
-        return(correct)
+        return (correct)
 
-kNN = KNN(5, trainingSet)
+
+KNN = KNN(5, trainingSet)
 testing_data_without_labels = getNeighbors(testSet)
-labels_to_check = kNN.predict(testing_data_without_labels)
-print("Score: " , kNN.score(testSet, labels_to_check))
+labels_to_check = KNN.predict(testing_data_without_labels)
+print("Score: ", KNN.score(testSet, labels_to_check))
 print("Total rows: ", len(testSet))
