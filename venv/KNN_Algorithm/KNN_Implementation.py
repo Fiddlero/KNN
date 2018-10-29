@@ -17,3 +17,15 @@ def getNeighbors(ourData):
     for temp in data:
         data.append((temp[0:4]))
     return data
+
+
+def getResponse(neighbours):
+    classVotes = {}
+    for x in range(len(neighbours)):
+        response = neighbours[x][-1]
+        if response in classVotes:
+            classVotes[response] += 1
+        else:
+            classVotes[response] = 1
+    sortedVotes = sorted(classVotes.__iter__(), key=operator.itemgetter(-1))
+    return sortedVotes[0]
